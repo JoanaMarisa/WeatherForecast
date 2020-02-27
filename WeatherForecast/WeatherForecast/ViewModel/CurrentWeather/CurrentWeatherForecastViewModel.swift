@@ -13,21 +13,29 @@ class CurrentWeatherForecastViewModel: ObservableObject {
     
     @Published var dataSource: CurrentWeatherCollectionCellViewModel?
 
-    let city: String
+    let cities: String
+    
+    var isLoading: Bool = false {
+        didSet {
+            self.updateLoadingStatus?()
+        }
+    }
     
     private let weatherForecastFetcher: WeatherForecastFetchable
     private var disposables = Set<AnyCancellable>()
+        
+    var updateLoadingStatus: (()->())?
 
-    init(city: String, weatherFetcher: WeatherForecastFetchable) {
+    init(cities: String, weatherFetcher: WeatherForecastFetchable) {
     
         self.weatherForecastFetcher = weatherFetcher
-        self.city = city
+        self.cities = cities
   
     }
   
     func refresh() {
     
-        weatherForecastFetcher.currentWeatherForecast(forCity: city)
+        weatherForecastFetcher.currentWeatherForecastForCities(forCities: cities)
             .map(CurrentWeatherCollectionCellViewModel.init)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] value in
@@ -38,7 +46,6 @@ class CurrentWeatherForecastViewModel: ObservableObject {
             
                     case .failure:
                         self.dataSource = nil
-        
                     case .finished:
                         break
         
@@ -48,10 +55,12 @@ class CurrentWeatherForecastViewModel: ObservableObject {
         
                 guard let self = self else { return }
                 self.dataSource = weather
+               
+                self.isLoading = false
         
             }).store(in: &disposables)
     
-    }
+  }
     
 }
 

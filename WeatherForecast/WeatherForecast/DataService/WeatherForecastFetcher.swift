@@ -21,7 +21,7 @@ class WeatherForecastFetcher {
 }
 
 protocol WeatherForecastFetchable {
-    func currentWeatherForecast( forCity city: String ) -> AnyPublisher <CurrentWeatherForecastResponse, WeatherForecastError>
+    func currentWeatherForecastForCities( forCities cities: String ) -> AnyPublisher<CurrentWeatherForecastResponse, WeatherForecastError>
 }
 
 
@@ -36,16 +36,16 @@ private extension WeatherForecastFetcher {
         static let key = "c6e381d8c7ff98f0fee43775817cf6ad"
 
     }
-    
-    func createCurrentWeatherForecastComponents( withCity city: String ) -> URLComponents {
+
+    func createCurrentWeatherForecastComponentsWithCities( withCities cities: String ) -> URLComponents {
         
       var components = URLComponents()
       components.scheme = WeatherAPIStructure.scheme
       components.host = WeatherAPIStructure.host
-      components.path = WeatherAPIStructure.path + "/weather"
+      components.path = WeatherAPIStructure.path + "/group"
       
       components.queryItems = [
-        URLQueryItem(name: "q", value: city),
+        URLQueryItem(name: "id", value: cities),
         URLQueryItem(name: "mode", value: "json"),
         URLQueryItem(name: "units", value: "metric"),
         URLQueryItem(name: "appid", value: WeatherAPIStructure.key)
@@ -61,10 +61,30 @@ private extension WeatherForecastFetcher {
 // MARK: - WeatherForecastFetchable
 
 extension WeatherForecastFetcher: WeatherForecastFetchable {
+    
+    func currentWeatherForecastForCities( forCities cities: String ) -> AnyPublisher<CurrentWeatherForecastResponse, WeatherForecastError> {
+        return forecast(with: createCurrentWeatherForecastComponentsWithCities(withCities: cities))
+    }
 
-  func currentWeatherForecast( forCity city: String ) -> AnyPublisher<CurrentWeatherForecastResponse, WeatherForecastError> {
-    return forecast(with: createCurrentWeatherForecastComponents(withCity: city))
-  }
+      private func forecastForCities<T> ( with components: URLComponents ) -> AnyPublisher<T, WeatherForecastError> where T: Decodable {
+        
+        guard let url = components.url else {
+            
+          let error = WeatherForecastError.network(description: "Something wrong happened with the URL!")
+          return Fail(error: error).eraseToAnyPublisher()
+            
+        }
+        
+        return session.dataTaskPublisher(for: URLRequest(url: url))
+          .mapError { error in
+            .network(description: error.localizedDescription)
+          }
+          .flatMap(maxPublishers: .max(1)) { pair in
+            decode(pair.data)
+          }
+          .eraseToAnyPublisher()
+      }
+        
 
   private func forecast<T> ( with components: URLComponents ) -> AnyPublisher<T, WeatherForecastError> where T: Decodable {
     

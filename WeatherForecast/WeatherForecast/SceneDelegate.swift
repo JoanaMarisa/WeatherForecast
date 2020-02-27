@@ -22,14 +22,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             
-            let fetcher = WeatherForecastFetcher()
-            let viewModel = CurrentWeatherForecastViewModel(city: "Porto", weatherFetcher: fetcher)
+//            let fetcher = WeatherForecastFetcher()
+//            let viewModel = CurrentWeatherForecastViewModel(city: "Porto", weatherFetcher: fetcher)
+//
+//            let window = UIWindow(windowScene: windowScene)
+//            window.rootViewController = UIHostingController(rootView: ContentView(viewModel: viewModel))
+//            self.window = window
+//            window.makeKeyAndVisible()
 
-            let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: ContentView(viewModel: viewModel))
-            self.window = window
-            window.makeKeyAndVisible()
-            
+             self.window = UIWindow(windowScene: windowScene)
+
+             let mainController = HomeScreenViewController.init()
+             let navigationController = UINavigationController(rootViewController: mainController)
+             navigationController.navigationBar.isTranslucent = true
+             self.window?.rootViewController = navigationController
+             self.window?.makeKeyAndVisible()
+             
         }
         
     }

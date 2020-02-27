@@ -12,10 +12,6 @@ struct CurrentWeatherCollectionCellViewModel {
     
     private let item: CurrentWeatherForecastResponse
   
-    var temperature: String {
-        return String(format: "%.1f", item.main.temperature)
-    }
-  
     init(item: CurrentWeatherForecastResponse) {
         self.item = item
     }

@@ -8,42 +8,46 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    
-    @ObservedObject var viewModel: CurrentWeatherForecastViewModel
-
-    init(viewModel: CurrentWeatherForecastViewModel) {
-        self.viewModel = viewModel
-    }
-
-    var body: some View {
-    
-        List(content: content).onAppear(perform: viewModel.refresh)
-            .navigationBarTitle(viewModel.city)
-            .listStyle(GroupedListStyle())
-  
-    }
-    
-}
-
-private extension ContentView {
-    
-    func content() -> some View {
-    
-        if let viewModel = viewModel.dataSource {
-            return AnyView(details(for: viewModel))
-        } else {
-            return AnyView(loading)
-        }
-    
-    }
-
-    func details(for viewModel: CurrentWeatherCollectionCellViewModel) -> some View {
-        CurrentWeatherCollectionCell(viewModel: viewModel)
-    }
-
-    var loading: some View {
-        Text("Loading \(viewModel.city)'s weather...").foregroundColor(.gray)
-    }
-    
-}
+//struct ContentView: View {
+//
+//    @ObservedObject var viewModel: CurrentWeatherForecastViewModel
+//
+//    init(viewModel: CurrentWeatherForecastViewModel) {
+//
+//        self.viewModel = viewModel
+//        let fetcher = WeatherForecastFetcher()
+//        self.viewModel = CurrentWeatherForecastViewModel(city: "Porto", weatherFetcher: fetcher)
+//
+//    }
+//
+//    var body: some View {
+//    
+//        List(content: content)
+//          .onAppear(perform: viewModel.refresh)
+//          .navigationBarTitle(viewModel.city)
+//          .listStyle(GroupedListStyle())
+//  
+//    }
+//    
+//}
+//
+//private extension ContentView {
+//    
+//    func content() -> some View {
+//          if let viewModel = viewModel.dataSource {
+//            return AnyView(details(for: viewModel))
+//          } else {
+//            return AnyView(loading)
+//          }
+//    
+//    }
+//
+//    func details(for viewModel: CurrentWeatherCollectionCellViewModel) -> some View {
+//        CurrentWeatherCollectionCell(viewModel: viewModel)
+//    }
+//
+//    var loading: some View {
+//        Text("Loading \(viewModel.city)'s weather...").foregroundColor(.gray)
+//  }
+//    
+//}

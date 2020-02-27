@@ -13,20 +13,81 @@ struct CurrentWeatherCollectionCell: View {
     
     private let viewModel: CurrentWeatherCollectionCellViewModel
       
+    var image: String
+    var category: String
+    var heading: String
+    
     init(viewModel: CurrentWeatherCollectionCellViewModel) {
+        
         self.viewModel = viewModel
+        self.image = "reallyHot"
+        self.category = "category"
+        self.heading = "heading"
+//        self.category = viewModel.temperature
+//        self.heading = viewModel.weatherDescription
+        
     }
       
     var body: some View {
        
-        VStack(alignment: .leading) {
-    
-            HStack {
-                Text("Temperature:")
-                Text("\(viewModel.temperature)°").foregroundColor(.gray)
+        HStack {
+            Image(image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+         
+            VStack {
+                VStack(alignment: .leading) {
+                    Text(category)
+                        .font(.headline)
+                        .foregroundColor(.secondary)
+                    Text(heading)
+                        .font(.title)
+                        .fontWeight(.black)
+                        .foregroundColor(.primary)
+                        .lineLimit(3)
+                }
+                .layoutPriority(100)
+         
+                Spacer()
             }
+            .padding([.top, .horizontal])
             
+               VStack {
+                   VStack(alignment: .leading) {
+                       Text(category)
+                           .font(.headline)
+                           .foregroundColor(.secondary)
+                       Text(heading)
+                           .font(.title)
+                           .fontWeight(.black)
+                           .foregroundColor(.primary)
+                           .lineLimit(3)
+                   }
+                   .layoutPriority(100)
+            
+                   Spacer()
+               }
+               .padding([.top, .horizontal])
+            
+               VStack {
+                   VStack(alignment: .leading) {
+                       Text(category)
+                           .font(.headline)
+                           .foregroundColor(.secondary)
+                       Text(heading)
+                           .font(.title)
+                           .fontWeight(.black)
+                           .foregroundColor(.primary)
+                           .lineLimit(3)
+                   }
+                   .layoutPriority(100)
+            
+                   Spacer()
+               }
+               .padding([.top, .horizontal])
         }
+        
+    
         
     }
     
