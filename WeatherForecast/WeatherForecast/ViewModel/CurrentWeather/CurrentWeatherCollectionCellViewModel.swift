@@ -11,7 +11,11 @@ import Foundation
 struct CurrentWeatherCollectionCellViewModel {
     
     private let item: CurrentWeatherForecastResponse
-  
+    
+    var citiesList: [List] {
+      return item.list
+    }
+    
     init(item: CurrentWeatherForecastResponse) {
         self.item = item
     }

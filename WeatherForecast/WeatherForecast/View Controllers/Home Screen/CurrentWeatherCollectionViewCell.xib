@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CurrentWeatherCollectionViewCell" customModule="WeatherForecast" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CurrentWeatherCollectionViewCell" id="gTV-IL-0wX" customClass="CurrentWeatherCollectionViewCell" customModule="WeatherForecast" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="269" height="246"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="269" height="246"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YZ0-8U-NNL">
+                        <rect key="frame" x="117" y="105.5" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="35" id="3hs-Pk-2lw"/>
+                            <constraint firstAttribute="height" constant="35" id="Wwt-Vf-23b"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7K-9j-0vd">
+                        <rect key="frame" x="16" y="36" width="237" height="0.0"/>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocQ-ub-4UA">
+                        <rect key="frame" x="20" y="230" width="229" height="0.0"/>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HC0-0P-2bX">
+                        <rect key="frame" x="219" y="0.0" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="5pL-J4-sR3"/>
+                            <constraint firstAttribute="height" constant="50" id="Yfh-1f-P9g"/>
+                        </constraints>
+                    </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delete" translatesAutoresizingMaskIntoConstraints="NO" id="YzG-Mj-dlk">
+                        <rect key="frame" x="239" y="14" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="9cS-1f-fPR"/>
+                            <constraint firstAttribute="height" constant="16" id="Atu-i1-Qfb"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="HC0-0P-2bX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="3e4-b3-T9U"/>
+                <constraint firstAttribute="trailing" secondItem="K7K-9j-0vd" secondAttribute="trailing" constant="16" id="5lQ-8Y-KIr"/>
+                <constraint firstItem="YzG-Mj-dlk" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="14" id="EVS-Vm-fQL"/>
+                <constraint firstItem="YZ0-8U-NNL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="K7K-9j-0vd" secondAttribute="bottom" constant="4" id="Fa8-nW-qdR"/>
+                <constraint firstItem="ocQ-ub-4UA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="OYg-86-KW8"/>
+                <constraint firstAttribute="trailing" secondItem="YzG-Mj-dlk" secondAttribute="trailing" constant="14" id="Q7X-xQ-9Zb"/>
+                <constraint firstItem="YZ0-8U-NNL" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="RG1-7Y-fr6"/>
+                <constraint firstAttribute="bottom" secondItem="ocQ-ub-4UA" secondAttribute="bottom" constant="16" id="SV5-35-JhD"/>
+                <constraint firstItem="YZ0-8U-NNL" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="V2t-1D-vHi"/>
+                <constraint firstItem="K7K-9j-0vd" firstAttribute="top" secondItem="YzG-Mj-dlk" secondAttribute="bottom" constant="6" id="Wq9-mP-ANA"/>
+                <constraint firstItem="K7K-9j-0vd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="bEu-ho-EOt"/>
+                <constraint firstAttribute="trailing" secondItem="HC0-0P-2bX" secondAttribute="trailing" id="gg2-9v-7EK"/>
+                <constraint firstItem="ocQ-ub-4UA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="YZ0-8U-NNL" secondAttribute="bottom" constant="4" id="lVP-Y2-q8p"/>
+                <constraint firstAttribute="trailing" secondItem="ocQ-ub-4UA" secondAttribute="trailing" constant="20" id="uvz-ag-ggs"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="269" height="246"/>
+            <connections>
+                <outlet property="cityTextLabel" destination="K7K-9j-0vd" id="qw1-XD-cMY"/>
+                <outlet property="deleteButton" destination="HC0-0P-2bX" id="5a3-Hr-weY"/>
+                <outlet property="temperatureValueLabel" destination="ocQ-ub-4UA" id="ZxZ-Hc-6Nt"/>
+                <outlet property="weatherIcon" destination="YZ0-8U-NNL" id="zje-0b-TIc"/>
+            </connections>
+            <point key="canvasLocation" x="55.797101449275367" y="85.714285714285708"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="delete" width="256" height="256"/>
+    </resources>
+</document>

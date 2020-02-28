@@ -15,6 +15,8 @@
 		170772882406CA9B00028D7F /* CurrentWeatherCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170772872406CA9B00028D7F /* CurrentWeatherCollectionCell.swift */; };
 		1707728D2407189100028D7F /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1707728B2407189100028D7F /* HomeScreenViewController.swift */; };
 		1707728E2407189100028D7F /* HomeScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1707728C2407189100028D7F /* HomeScreenViewController.xib */; };
+		175DAC6C2408825B00D5E061 /* CurrentWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DAC6A2408825B00D5E061 /* CurrentWeatherCollectionViewCell.swift */; };
+		175DAC6D2408825B00D5E061 /* CurrentWeatherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 175DAC6B2408825B00D5E061 /* CurrentWeatherCollectionViewCell.xib */; };
 		17F8F0FA24067647008F97FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F8F0F924067647008F97FE /* AppDelegate.swift */; };
 		17F8F0FC24067647008F97FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F8F0FB24067647008F97FE /* SceneDelegate.swift */; };
 		17F8F0FE24067647008F97FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F8F0FD24067647008F97FE /* ContentView.swift */; };
@@ -32,6 +34,8 @@
 		170772872406CA9B00028D7F /* CurrentWeatherCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherCollectionCell.swift; sourceTree = "<group>"; };
 		1707728B2407189100028D7F /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		1707728C2407189100028D7F /* HomeScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeScreenViewController.xib; sourceTree = "<group>"; };
+		175DAC6A2408825B00D5E061 /* CurrentWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
+		175DAC6B2408825B00D5E061 /* CurrentWeatherCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentWeatherCollectionViewCell.xib; sourceTree = "<group>"; };
 		17F8F0F624067647008F97FE /* WeatherForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17F8F0F924067647008F97FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17F8F0FB24067647008F97FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 		170772852406CA6D00028D7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				175DAC6924087D1500D5E061 /* New Group */,
 				170772862406CA7500028D7F /* CurrentWeather */,
 			);
 			path = Views;
@@ -110,6 +115,8 @@
 			children = (
 				1707728B2407189100028D7F /* HomeScreenViewController.swift */,
 				1707728C2407189100028D7F /* HomeScreenViewController.xib */,
+				175DAC6A2408825B00D5E061 /* CurrentWeatherCollectionViewCell.swift */,
+				175DAC6B2408825B00D5E061 /* CurrentWeatherCollectionViewCell.xib */,
 			);
 			path = "Home Screen";
 			sourceTree = "<group>";
@@ -119,6 +126,13 @@
 			children = (
 			);
 			path = City;
+			sourceTree = "<group>";
+		};
+		175DAC6924087D1500D5E061 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		17F8F0ED24067647008F97FE = {
@@ -225,6 +239,7 @@
 				1707728E2407189100028D7F /* HomeScreenViewController.xib in Resources */,
 				17F8F10324067649008F97FE /* Preview Assets.xcassets in Resources */,
 				17F8F10024067649008F97FE /* Assets.xcassets in Resources */,
+				175DAC6D2408825B00D5E061 /* CurrentWeatherCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +258,7 @@
 				170772842406C8A000028D7F /* CurrentWeatherForecastViewModel.swift in Sources */,
 				170772782406B97600028D7F /* WeatherForecastFetcher.swift in Sources */,
 				1707727E2406C1CE00028D7F /* CurrentWeatherCollectionCellViewModel.swift in Sources */,
+				175DAC6C2408825B00D5E061 /* CurrentWeatherCollectionViewCell.swift in Sources */,
 				170772802406C2B800028D7F /* WeatherForecastError.swift in Sources */,
 				1707728D2407189100028D7F /* HomeScreenViewController.swift in Sources */,
 			);
