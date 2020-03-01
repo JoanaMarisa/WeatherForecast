@@ -8,15 +8,23 @@
 
 import UIKit
 import SwiftUI
-import Combine
+import MapKit
+import CoreLocation
+
 
 class HomeScreenViewController: UIViewController {
 
     var viewModel: CurrentWeatherForecastViewModel
     var locations: [List]!
+
+    let locationManager = CLLocationManager()
+    var myLocation:CLLocationCoordinate2D?
     
     @IBOutlet weak var locationsCollectionView: UICollectionView!
     @IBOutlet weak var heightCollectionConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var mapView: UIView!
+    @IBOutlet weak var mapViewKit: MKMapView!
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -60,11 +68,79 @@ class HomeScreenViewController: UIViewController {
         }
         
         viewModel.refresh()
+        
+        if CLLocationManager.locationServicesEnabled() {
+        
+            self.locationManager.delegate = self
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            self.locationManager.startUpdatingLocation()
+        
+        }
 
+        self.mapViewKit.delegate = self
+        self.mapViewKit.mapType = .standard
+        self.mapViewKit.isZoomEnabled = true
+        self.mapViewKit.isScrollEnabled = true
+
+        if let coor = self.mapViewKit.userLocation.location?.coordinate{
+            self.mapViewKit.setCenter(coor, animated: true)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.mapViewKit.showsUserLocation = true;
+    
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.mapViewKit.showsUserLocation = false
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        super.viewWillTransition(to: size, with: coordinator)
+        self.locationsCollectionView.reloadData()
+        
+    }
+    
+    func showMapPlaceholder() {
+        self.mapView.isHidden = true
+    }
+    
+}
+
+
+extension HomeScreenViewController: CLLocationManagerDelegate,MKMapViewDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        centerMap(locValue)
+        
+     }
+    
+    func centerMap(_ center:CLLocationCoordinate2D){
+        
+        self.saveCurrentLocation(center)
+        
+        let latDelta: CLLocationDegrees = 0.05
+        let lonDelta: CLLocationDegrees = 0.05
+        
+        let span = MKCoordinateSpan.init(latitudeDelta: latDelta, longitudeDelta: lonDelta)
+
+        let newRegion = MKCoordinateRegion(center:center , span: span)
+        self.mapViewKit.setRegion(newRegion, animated: true)
+    
+    }
+    
+    func saveCurrentLocation(_ center:CLLocationCoordinate2D) {
+        
+        print("\(center.latitude) , \(center.longitude)")
+        self.myLocation = center
+    
     }
     
 }
@@ -106,6 +182,8 @@ extension HomeScreenViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if isLandscape {
+            
+            showMapPlaceholder()
             
             let availableWidth = self.locationsCollectionView.bounds.size.width / 6
             let availableHeight = self.view.bounds.size.height / 3

@@ -60,7 +60,6 @@
 		170772742406B67900028D7F /* DataService */ = {
 			isa = PBXGroup;
 			children = (
-				175DAC632408651500D5E061 /* City */,
 				1707727F2406C2B800028D7F /* WeatherForecastError.swift */,
 				170772772406B97600028D7F /* WeatherForecastFetcher.swift */,
 				170772792406BE4D00028D7F /* WeatherForecastResponses.swift */,
@@ -88,7 +87,6 @@
 		170772852406CA6D00028D7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				175DAC6924087D1500D5E061 /* New Group */,
 				170772862406CA7500028D7F /* CurrentWeather */,
 			);
 			path = Views;
@@ -119,20 +117,6 @@
 				175DAC6B2408825B00D5E061 /* CurrentWeatherCollectionViewCell.xib */,
 			);
 			path = "Home Screen";
-			sourceTree = "<group>";
-		};
-		175DAC632408651500D5E061 /* City */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = City;
-			sourceTree = "<group>";
-		};
-		175DAC6924087D1500D5E061 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		17F8F0ED24067647008F97FE = {

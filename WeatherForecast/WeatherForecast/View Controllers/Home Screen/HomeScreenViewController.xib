@@ -11,6 +11,8 @@
             <connections>
                 <outlet property="heightCollectionConstraint" destination="Lc2-um-Sin" id="jpU-m4-Fwc"/>
                 <outlet property="locationsCollectionView" destination="WVL-30-ahO" id="iSq-54-HT3"/>
+                <outlet property="mapView" destination="436-bB-phJ" id="vhb-N5-r5I"/>
+                <outlet property="mapViewKit" destination="Phz-Zw-MJZ" id="vVa-5Y-80I"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,10 +22,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="WVL-30-ahO">
-                    <rect key="frame" x="0.0" y="123.5" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="123.5" width="414" height="210"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="818" id="Lc2-um-Sin"/>
+                        <constraint firstAttribute="height" constant="210" id="Lc2-um-Sin"/>
                     </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sh9-WN-NVb">
                         <size key="itemSize" width="50" height="50"/>
@@ -38,15 +40,43 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQu-1y-VuF">
+                    <rect key="frame" x="24" y="361.5" width="366" height="26"/>
+                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="436-bB-phJ">
+                    <rect key="frame" x="0.0" y="397.5" width="414" height="498.5"/>
+                    <subviews>
+                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Phz-Zw-MJZ">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="498.5"/>
+                        </mapView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Phz-Zw-MJZ" secondAttribute="trailing" id="Tn5-rT-ndD"/>
+                        <constraint firstItem="Phz-Zw-MJZ" firstAttribute="top" secondItem="436-bB-phJ" secondAttribute="top" id="TnE-3q-VtL"/>
+                        <constraint firstItem="Phz-Zw-MJZ" firstAttribute="leading" secondItem="436-bB-phJ" secondAttribute="leading" id="oVH-Wb-RHS"/>
+                        <constraint firstAttribute="bottom" secondItem="Phz-Zw-MJZ" secondAttribute="bottom" id="uc9-Cp-Ggc"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="aPx-JT-eO6" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="24" id="2za-Ji-4Ue"/>
+                <constraint firstAttribute="bottom" secondItem="436-bB-phJ" secondAttribute="bottom" id="99a-8m-Rzg"/>
+                <constraint firstItem="lQu-1y-VuF" firstAttribute="top" secondItem="WVL-30-ahO" secondAttribute="bottom" constant="28" id="A5H-Cc-0kX"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="WVL-30-ahO" secondAttribute="trailing" id="EOS-9d-QpQ"/>
                 <constraint firstItem="WVL-30-ahO" firstAttribute="top" secondItem="aPx-JT-eO6" secondAttribute="bottom" constant="24" id="I8C-Ce-Z84"/>
+                <constraint firstItem="436-bB-phJ" firstAttribute="top" secondItem="lQu-1y-VuF" secondAttribute="bottom" constant="10" id="KNC-Ti-TWu"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="436-bB-phJ" secondAttribute="trailing" id="NF7-Iq-PYn"/>
                 <constraint firstItem="aPx-JT-eO6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="R0Z-oY-LYi"/>
                 <constraint firstItem="WVL-30-ahO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="S1s-4R-1Jy"/>
+                <constraint firstItem="lQu-1y-VuF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="eaR-cu-XE8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aPx-JT-eO6" secondAttribute="trailing" constant="40" id="jg0-qc-r33"/>
+                <constraint firstItem="436-bB-phJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tRc-Y6-PGR"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lQu-1y-VuF" secondAttribute="trailing" constant="24" id="yTQ-VQ-dqk"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="98.4375"/>
