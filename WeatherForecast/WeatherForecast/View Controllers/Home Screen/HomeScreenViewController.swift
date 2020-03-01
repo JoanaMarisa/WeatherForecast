@@ -26,6 +26,9 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var mapViewKit: MKMapView!
     
+    @IBOutlet weak var zoomInButton: UIButton!
+    @IBOutlet weak var zoomOutButton: UIButton!
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -38,16 +41,14 @@ class HomeScreenViewController: UIViewController {
         
     }
     
-    override func viewDidLoad() {
+    func initLocationsCollectionView() {
         
-        super.viewDidLoad()
-
         let cellNib = UINib(nibName: String(describing: CurrentWeatherCollectionViewCell.self), bundle: nil)
         self.locationsCollectionView.register(cellNib, forCellWithReuseIdentifier: String(describing: CurrentWeatherCollectionViewCell.self))
         
         self.locationsCollectionView.delegate = self
         self.locationsCollectionView.dataSource = self
-
+    
         viewModel.updateLoadingStatus = { [weak self] () in
             DispatchQueue.main.async {
                 
@@ -69,6 +70,10 @@ class HomeScreenViewController: UIViewController {
         
         viewModel.refresh()
         
+    }
+    
+    func initLocationManager() {
+        
         if CLLocationManager.locationServicesEnabled() {
         
             self.locationManager.delegate = self
@@ -87,6 +92,24 @@ class HomeScreenViewController: UIViewController {
         }
         
         addLongPressGesture()
+        
+    }
+    
+    func initButtons() {
+        
+        self.zoomInButton.setBackgroundImage(UIImage.init(named: "zoomIn"))
+        self.zoomOutButton.setBackgroundImage(UIImage.init(named: "zoomOut"))
+    
+    }
+    
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+
+        initLocationsCollectionView()
+        initLocationManager()
+        initButtons()
         
     }
     
@@ -137,6 +160,24 @@ class HomeScreenViewController: UIViewController {
         
     }
     
+    @IBAction func mapZoomIn(_ sender: Any) {
+    
+        var region: MKCoordinateRegion = mapViewKit.region
+        region.span.latitudeDelta /= 2.0
+        region.span.longitudeDelta /= 2.0
+        self.mapViewKit.setRegion(region, animated: true)
+        
+    }
+    
+    @IBAction func mapZoomOut(_ sender: Any) {
+           
+        var region: MKCoordinateRegion = mapViewKit.region
+        region.span.latitudeDelta = min(region.span.latitudeDelta * 2.0, 180.0)
+        region.span.longitudeDelta = min(region.span.longitudeDelta * 2.0, 180.0)
+        mapViewKit.setRegion(region, animated: true)
+    
+    }
+    
 }
 
 
@@ -153,8 +194,8 @@ extension HomeScreenViewController: CLLocationManagerDelegate,MKMapViewDelegate 
         
         self.saveCurrentLocation(center)
         
-        let latDelta: CLLocationDegrees = 0.05
-        let lonDelta: CLLocationDegrees = 0.05
+        let latDelta: CLLocationDegrees = 0.10
+        let lonDelta: CLLocationDegrees = 0.10
         
         let span = MKCoordinateSpan.init(latitudeDelta: latDelta, longitudeDelta: lonDelta)
 
