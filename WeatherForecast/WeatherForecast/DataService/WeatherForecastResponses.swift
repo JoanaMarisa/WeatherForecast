@@ -20,11 +20,11 @@ struct List: Codable {
     let sys: Sys
     let weather: [Weather]
     let main: Main
+    let visibility: Int?
     let wind: Wind
     let clouds: Clouds
     let dt, id: Int
     let name: String
-    let visibility: Int?
 }
 
 // MARK: - Clouds
@@ -72,5 +72,6 @@ struct Weather: Codable {
 // MARK: - Wind
 struct Wind: Codable {
     let speed: Double
-    let deg: Int
+    let deg: Int?
 }
+

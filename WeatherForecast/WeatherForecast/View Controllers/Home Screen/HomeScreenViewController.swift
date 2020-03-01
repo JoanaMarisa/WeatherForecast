@@ -86,6 +86,8 @@ class HomeScreenViewController: UIViewController {
             self.mapViewKit.setCenter(coor, animated: true)
         }
         
+        addLongPressGesture()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,6 +110,31 @@ class HomeScreenViewController: UIViewController {
     
     func showMapPlaceholder() {
         self.mapView.isHidden = true
+    }
+    
+    func addLongPressGesture() {
+        
+        let longPressRecogniser = UILongPressGestureRecognizer(target:self , action:#selector(handleLongPress(_:)))
+        longPressRecogniser.minimumPressDuration = 0.6
+        self.mapViewKit.addGestureRecognizer(longPressRecogniser)
+        
+    }
+    
+    @objc func handleLongPress(_ gestureRecognizer:UIGestureRecognizer) {
+        
+        if gestureRecognizer.state != .began{
+            return
+        }
+        
+        let touchPoint:CGPoint = gestureRecognizer.location(in: self.mapViewKit)
+        let touchMapCoordinate:CLLocationCoordinate2D = self.mapViewKit.convert(touchPoint, toCoordinateFrom: self.mapViewKit)
+        
+        let annotation:MKPointAnnotation = MKPointAnnotation()
+        annotation.coordinate = touchMapCoordinate
+        
+        self.mapViewKit.addAnnotation(annotation)
+        self.centerMap(touchMapCoordinate)
+        
     }
     
 }
@@ -141,6 +168,19 @@ extension HomeScreenViewController: CLLocationManagerDelegate,MKMapViewDelegate 
         print("\(center.latitude) , \(center.longitude)")
         self.myLocation = center
     
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        for annotation in self.mapViewKit.annotations {
+            
+            if (view.annotation?.coordinate.latitude == annotation.coordinate.latitude) &&
+                (view.annotation?.coordinate.longitude == annotation.coordinate.longitude) {
+                self.mapViewKit.removeAnnotation(annotation)
+            }
+            
+        }
+        
     }
     
 }
