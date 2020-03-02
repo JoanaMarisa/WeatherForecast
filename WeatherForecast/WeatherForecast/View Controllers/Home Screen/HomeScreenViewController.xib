@@ -37,7 +37,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Weather" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPx-JT-eO6">
-                    <rect key="frame" x="24" y="68" width="350" height="31.5"/>
+                    <rect key="frame" x="24" y="68" width="183" height="31.5"/>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="24"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -87,20 +87,40 @@
                         <constraint firstAttribute="bottom" secondItem="Phz-Zw-MJZ" secondAttribute="bottom" id="uc9-Cp-Ggc"/>
                     </constraints>
                 </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info" translatesAutoresizingMaskIntoConstraints="NO" id="AHR-NB-I1N">
+                    <rect key="frame" x="215" y="74" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="1vg-mo-qAQ"/>
+                        <constraint firstAttribute="width" constant="20" id="fHa-81-gE2"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qoc-Y2-Lrd">
+                    <rect key="frame" x="207" y="59" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="Nji-Xy-ghJ"/>
+                        <constraint firstAttribute="height" constant="50" id="c71-LV-kKW"/>
+                    </constraints>
+                    <connections>
+                        <action selector="showHelpScreen:" destination="-1" eventType="touchUpInside" id="MPK-kC-cOL"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="aPx-JT-eO6" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="24" id="2za-Ji-4Ue"/>
                 <constraint firstAttribute="bottom" secondItem="436-bB-phJ" secondAttribute="bottom" id="99a-8m-Rzg"/>
                 <constraint firstItem="lQu-1y-VuF" firstAttribute="top" secondItem="WVL-30-ahO" secondAttribute="bottom" constant="28" id="A5H-Cc-0kX"/>
+                <constraint firstItem="AHR-NB-I1N" firstAttribute="leading" secondItem="aPx-JT-eO6" secondAttribute="trailing" constant="8" id="EEK-f8-CdJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="WVL-30-ahO" secondAttribute="trailing" id="EOS-9d-QpQ"/>
                 <constraint firstItem="WVL-30-ahO" firstAttribute="top" secondItem="aPx-JT-eO6" secondAttribute="bottom" constant="24" id="I8C-Ce-Z84"/>
                 <constraint firstItem="436-bB-phJ" firstAttribute="top" secondItem="lQu-1y-VuF" secondAttribute="bottom" constant="10" id="KNC-Ti-TWu"/>
+                <constraint firstItem="Qoc-Y2-Lrd" firstAttribute="centerY" secondItem="aPx-JT-eO6" secondAttribute="centerY" id="L4Y-gz-jDe"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="436-bB-phJ" secondAttribute="trailing" id="NF7-Iq-PYn"/>
                 <constraint firstItem="aPx-JT-eO6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="R0Z-oY-LYi"/>
                 <constraint firstItem="WVL-30-ahO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="S1s-4R-1Jy"/>
+                <constraint firstItem="AHR-NB-I1N" firstAttribute="centerY" secondItem="aPx-JT-eO6" secondAttribute="centerY" id="dGI-Il-8Bc"/>
                 <constraint firstItem="lQu-1y-VuF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="eaR-cu-XE8"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aPx-JT-eO6" secondAttribute="trailing" constant="40" id="jg0-qc-r33"/>
+                <constraint firstItem="Qoc-Y2-Lrd" firstAttribute="leading" secondItem="aPx-JT-eO6" secondAttribute="trailing" id="q6N-hi-92j"/>
                 <constraint firstItem="436-bB-phJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tRc-Y6-PGR"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lQu-1y-VuF" secondAttribute="trailing" constant="24" id="yTQ-VQ-dqk"/>
             </constraints>
@@ -108,4 +128,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="98.4375"/>
         </view>
     </objects>
+    <resources>
+        <image name="info" width="256" height="256"/>
+    </resources>
 </document>

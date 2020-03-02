@@ -178,6 +178,13 @@ class HomeScreenViewController: UIViewController {
     
     }
     
+    @IBAction func showHelpScreen(_ sender: Any) {
+    
+        let helpScreenViewController = HelpScreenViewController()
+        present(helpScreenViewController, animated: true, completion: nil)
+        
+    }
+    
 }
 
 
