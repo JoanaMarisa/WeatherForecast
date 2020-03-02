@@ -153,6 +153,33 @@ class HomeScreenViewController: UIViewController {
         
         self.mapViewKit.addAnnotation(annotation)
         self.centerMap(touchMapCoordinate)
+
+        let geoCoder = CLGeocoder()
+        let location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+        geoCoder.reverseGeocodeLocation(location, completionHandler: { placemarks, error -> Void in
+
+                guard let placeMark = placemarks?.first else { return }
+
+                if ((placeMark.locality != nil) && (placeMark.country != nil)) {
+                    
+                    let citiesFiltered = self.cityListViewModel.searchCityWithCoord(cityName: placeMark.locality ?? "",  latitude: annotation.coordinate.latitude)
+                    
+                    self.bookmarkedCitiesIDs = ""
+                    for (index, item) in citiesFiltered.enumerated() {
+                        
+                        if (index < 6) {
+                            self.bookmarkedCitiesIDs.append(String(format: "%d,", item.id))
+                        } else {
+                            break
+                        }
+                        
+                    }
+                    
+                    self.reloadCollectionView()
+                    
+                }
+                
+        })
         
     }
     
@@ -202,7 +229,7 @@ class HomeScreenViewController: UIViewController {
             self.bookmarkedCitiesIDs = ""
             for (index, item) in citiesFiltered.enumerated() {
                 
-                if (index < 4) {
+                if (index < 6) {
                     self.bookmarkedCitiesIDs.append(String(format: "%d,", item.id))
                 } else {
                     break
@@ -210,13 +237,15 @@ class HomeScreenViewController: UIViewController {
                 
             }
             
-            self.initLocationsCollectionView()
+            self.reloadCollectionView()
             
         }))
 
         self.present(alertController, animated: true, completion: nil)
         
     }
+    
+    // MARK: Collection Support Methods
     
     func reloadCollectionView() {
         

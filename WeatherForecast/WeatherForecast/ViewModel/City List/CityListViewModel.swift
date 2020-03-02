@@ -48,9 +48,8 @@ class CityListViewModel: ObservableObject {
         func filterSeach(city: CityElement) -> Bool {
             
             guard !searchTerm.isEmpty else { return true }
-            let searchTermLowerCased = searchTerm.lowercased()
-            let searchStringList = searchTermLowerCased.split(separator: " ")
-            let contained = searchStringList.contains(where: { city.name.lowercased() == ($0) })
+            let searchStringList = searchTerm.lowercased()
+            let contained = (searchStringList == city.name.lowercased())
 
             return contained
             
@@ -58,7 +57,26 @@ class CityListViewModel: ObservableObject {
 
         return self.supportedCities.filter(filterSeach)
 
-       }
+    }
+    
+    func searchCityWithCoord(cityName: String, latitude: Double) -> Cities {
+        
+        resetSearch()
+        
+        func filterSeach(city: CityElement) -> Bool {
+            
+            guard !cityName.isEmpty else { return true }
+            
+            let searchCityNameStringList = cityName.lowercased()
+
+            let contained = (searchCityNameStringList == city.name.lowercased() && (latitude < city.coord.lat + 1 && latitude > city.coord.lat - 1))
+            return contained
+            
+        }
+
+        return self.supportedCities.filter(filterSeach)
+
+    }
     
     func resetSearch() {
         self.supportedCities = self.allSupportedCitites
