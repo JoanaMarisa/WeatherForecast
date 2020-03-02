@@ -14,9 +14,13 @@ import CoreLocation
 
 class HomeScreenViewController: UIViewController {
 
-    var viewModel: CurrentWeatherForecastViewModel
+    var viewModel: CurrentWeatherForecastViewModel!
     var locations: [List]!
 
+    let fetcher = WeatherForecastFetcher()
+    var cityListViewModel: CityListViewModel
+    var bookmarkedCitiesIDs: String! = String()
+    
     let locationManager = CLLocationManager()
     var myLocation:CLLocationCoordinate2D?
     
@@ -28,6 +32,10 @@ class HomeScreenViewController: UIViewController {
     
     @IBOutlet weak var zoomInButton: UIButton!
     @IBOutlet weak var zoomOutButton: UIButton!
+    @IBOutlet weak var addNewLocationsView: UIView!
+    
+    
+    // MARK: Initializers
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -35,8 +43,8 @@ class HomeScreenViewController: UIViewController {
     
     init() {
         
-        let fetcher = WeatherForecastFetcher()
-        self.viewModel = CurrentWeatherForecastViewModel(cities: "2766444,703448,1255364,7873305,2643743", weatherFetcher: fetcher)
+        let citiesFetcher = SupportedCitiesFetcher(cityListFilePath:  Bundle.main.url(forResource: "cities", withExtension: "json")!)
+        self.cityListViewModel = CityListViewModel(cityFecther: citiesFetcher)
         super.init(nibName: String(describing:HomeScreenViewController.self), bundle: nil)
         
     }
@@ -49,26 +57,7 @@ class HomeScreenViewController: UIViewController {
         self.locationsCollectionView.delegate = self
         self.locationsCollectionView.dataSource = self
     
-        viewModel.updateLoadingStatus = { [weak self] () in
-            DispatchQueue.main.async {
-                
-                let isLoading = self?.viewModel.isLoading ?? false
-                if isLoading {
-                   print("Is loading")
-                } else {
-                    
-                    print("Stop loading")
-                    let locations = self?.viewModel.dataSource?.citiesList
-                    self?.locations = locations!
-                    self?.locationsCollectionView.reloadData()
-                
-                }
-                
-            }
-            
-        }
-        
-        viewModel.refresh()
+        reloadCollectionView()
         
     }
     
@@ -103,13 +92,17 @@ class HomeScreenViewController: UIViewController {
     }
     
     
+    // MARK: Life Cycle
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
 
-        initLocationsCollectionView()
         initLocationManager()
         initButtons()
+        initLocationsCollectionView()
+        
+        cityListViewModel.update()
         
     }
     
@@ -130,6 +123,9 @@ class HomeScreenViewController: UIViewController {
         self.locationsCollectionView.reloadData()
         
     }
+    
+    
+    // MARK: Location Support Methods
     
     func showMapPlaceholder() {
         self.mapView.isHidden = true
@@ -160,6 +156,9 @@ class HomeScreenViewController: UIViewController {
         
     }
     
+    
+    // MARK: IBActions
+    
     @IBAction func mapZoomIn(_ sender: Any) {
     
         var region: MKCoordinateRegion = mapViewKit.region
@@ -185,10 +184,71 @@ class HomeScreenViewController: UIViewController {
         
     }
     
+    @IBAction func addLocationsToList(_ sender: Any) {
+        
+        self.cityListViewModel.resetSearch()
+        
+        let alertController = UIAlertController(title: "Insert city:", message: "", preferredStyle: UIAlertController.Style.alert)
+
+        alertController.addTextField(configurationHandler: {(textField: UITextField!) in
+            textField.placeholder = "City name"
+        })
+        
+        alertController.addAction(UIAlertAction(title: "Search", style: UIAlertAction.Style.default, handler: { alert -> Void in
+            
+            let firstTextField = alertController.textFields![0] as UITextField
+            let citiesFiltered = self.cityListViewModel.searchCity(searchTerm: firstTextField.text!)
+            
+            self.bookmarkedCitiesIDs = ""
+            for (index, item) in citiesFiltered.enumerated() {
+                
+                if (index < 4) {
+                    self.bookmarkedCitiesIDs.append(String(format: "%d,", item.id))
+                } else {
+                    break
+                }
+                
+            }
+            
+            self.initLocationsCollectionView()
+            
+        }))
+
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func reloadCollectionView() {
+        
+        self.viewModel = CurrentWeatherForecastViewModel(cities: self.bookmarkedCitiesIDs, weatherFetcher: self.fetcher)
+        
+        viewModel.updateLoadingStatus = { [weak self] () in
+            DispatchQueue.main.async {
+                
+                let isLoading = self?.viewModel.isLoading ?? false
+                if isLoading {
+                   print("Is loading")
+                } else {
+                    
+                    print("Stop loading")
+                    let locations = self?.viewModel.dataSource?.citiesList
+                    self?.locations = locations!
+                    self?.locationsCollectionView.reloadData()
+                
+                }
+                
+            }
+            
+        }
+        
+        viewModel.refresh()
+        
+    }
+    
 }
 
 
-extension HomeScreenViewController: CLLocationManagerDelegate,MKMapViewDelegate {
+extension HomeScreenViewController: CLLocationManagerDelegate, MKMapViewDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -236,7 +296,15 @@ extension HomeScreenViewController: CLLocationManagerDelegate,MKMapViewDelegate 
 extension HomeScreenViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if (self.locations?.count ?? 0 > 0) {
+            self.addNewLocationsView.isHidden = true
+        } else {
+            self.addNewLocationsView.isHidden = false
+        }
+        
         return self.locations?.count ?? 0;
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeScreenViewController" customModule="WeatherForecast" customModuleProvider="target">
             <connections>
+                <outlet property="addNewLocationsView" destination="TNC-EE-Qfo" id="hjX-pE-ljT"/>
                 <outlet property="heightCollectionConstraint" destination="Lc2-um-Sin" id="jpU-m4-Fwc"/>
                 <outlet property="locationsCollectionView" destination="WVL-30-ahO" id="iSq-54-HT3"/>
                 <outlet property="mapView" destination="436-bB-phJ" id="vhb-N5-r5I"/>
@@ -23,6 +24,12 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Weather" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPx-JT-eO6">
+                    <rect key="frame" x="24" y="68" width="183" height="31.5"/>
+                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="24"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="WVL-30-ahO">
                     <rect key="frame" x="0.0" y="123.5" width="414" height="210"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -36,12 +43,27 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Weather" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPx-JT-eO6">
-                    <rect key="frame" x="24" y="68" width="183" height="31.5"/>
-                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="24"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TNC-EE-Qfo">
+                    <rect key="frame" x="0.0" y="123.5" width="414" height="210"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2T2-ap-CFi">
+                            <rect key="frame" x="182" y="80" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="O26-P9-aeP"/>
+                                <constraint firstAttribute="width" constant="50" id="ldP-7D-MnM"/>
+                            </constraints>
+                            <state key="normal" image="addLocation"/>
+                            <connections>
+                                <action selector="addLocationsToList:" destination="-1" eventType="touchUpInside" id="Nek-0r-uo6"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="2T2-ap-CFi" firstAttribute="centerY" secondItem="TNC-EE-Qfo" secondAttribute="centerY" id="g9q-CB-efe"/>
+                        <constraint firstItem="2T2-ap-CFi" firstAttribute="centerX" secondItem="TNC-EE-Qfo" secondAttribute="centerX" id="sEb-nU-dII"/>
+                    </constraints>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQu-1y-VuF">
                     <rect key="frame" x="24" y="361.5" width="366" height="26"/>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
@@ -108,8 +130,10 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="aPx-JT-eO6" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="24" id="2za-Ji-4Ue"/>
+                <constraint firstItem="lQu-1y-VuF" firstAttribute="top" secondItem="TNC-EE-Qfo" secondAttribute="bottom" constant="28" id="6I7-fS-0PZ"/>
                 <constraint firstAttribute="bottom" secondItem="436-bB-phJ" secondAttribute="bottom" id="99a-8m-Rzg"/>
                 <constraint firstItem="lQu-1y-VuF" firstAttribute="top" secondItem="WVL-30-ahO" secondAttribute="bottom" constant="28" id="A5H-Cc-0kX"/>
+                <constraint firstItem="TNC-EE-Qfo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="DPX-bX-fYO"/>
                 <constraint firstItem="AHR-NB-I1N" firstAttribute="leading" secondItem="aPx-JT-eO6" secondAttribute="trailing" constant="8" id="EEK-f8-CdJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="WVL-30-ahO" secondAttribute="trailing" id="EOS-9d-QpQ"/>
                 <constraint firstItem="WVL-30-ahO" firstAttribute="top" secondItem="aPx-JT-eO6" secondAttribute="bottom" constant="24" id="I8C-Ce-Z84"/>
@@ -120,7 +144,9 @@
                 <constraint firstItem="WVL-30-ahO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="S1s-4R-1Jy"/>
                 <constraint firstItem="AHR-NB-I1N" firstAttribute="centerY" secondItem="aPx-JT-eO6" secondAttribute="centerY" id="dGI-Il-8Bc"/>
                 <constraint firstItem="lQu-1y-VuF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="eaR-cu-XE8"/>
+                <constraint firstItem="TNC-EE-Qfo" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="jYN-dh-f8y"/>
                 <constraint firstItem="Qoc-Y2-Lrd" firstAttribute="leading" secondItem="aPx-JT-eO6" secondAttribute="trailing" id="q6N-hi-92j"/>
+                <constraint firstItem="TNC-EE-Qfo" firstAttribute="top" secondItem="aPx-JT-eO6" secondAttribute="bottom" constant="24" id="qV5-i9-OsY"/>
                 <constraint firstItem="436-bB-phJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tRc-Y6-PGR"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lQu-1y-VuF" secondAttribute="trailing" constant="24" id="yTQ-VQ-dqk"/>
             </constraints>
@@ -129,6 +155,7 @@
         </view>
     </objects>
     <resources>
+        <image name="addLocation" width="256" height="256"/>
         <image name="info" width="256" height="256"/>
     </resources>
 </document>
