@@ -30,45 +30,34 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
                 let currentWeather = currentWeatherForecastViewModel?.weather.first
                 let currentMain = currentWeatherForecastViewModel?.main
                 
+                self.weatherIcon?.image = getIconForCurrentWeather(currentWeather: currentWeather!.main)
+                
                 switch currentWeather?.main {
                 case "Clouds":
-                    
-                    self.weatherIcon?.image =  UIImage(named: "cloudsAndSun")
                     self.contentView.backgroundColor = mediumWeatherColor
                     break
                     
                 case "Clear":
-                    
-                    self.weatherIcon?.image =  UIImage(named: "sun")
                     self.contentView.backgroundColor = goodWeatherColor
                     break
                     
                 case "Snow":
-                    
-                    self.weatherIcon?.image =  UIImage(named: "snow")
                     self.contentView.backgroundColor = badWeatherColor
                     break
                     
                 case "Rain":
-                    
-                    self.weatherIcon?.image =  UIImage(named: "rain")
                     self.contentView.backgroundColor = badWeatherColor
                     break
                     
                 case "Haze":
-                    
-                    self.weatherIcon?.image =  UIImage(named: "cloudsAndSun")
                     self.contentView.backgroundColor = mediumWeatherColor
                     break
                     
                 case "Drizzle":
-                    
-                    self.weatherIcon?.image =  UIImage(named: "rainWithClouds")
                     self.contentView.backgroundColor = badWeatherColor
                     break
                     
                 default:
-                    self.weatherIcon?.image =  UIImage(named: "cloudsAndSun")
                     self.contentView.backgroundColor = mediumWeatherColor
                     break
                 }

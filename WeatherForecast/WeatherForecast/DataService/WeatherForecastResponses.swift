@@ -21,6 +21,7 @@ struct List: Codable {
     let weather: [Weather]
     let main: Main
     let visibility: Int?
+    let precipitation: Int?
     let wind: Wind
     let clouds: Clouds
     let dt, id: Int
