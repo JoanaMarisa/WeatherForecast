@@ -441,7 +441,9 @@ extension HomeScreenViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let cityScreenController = CityScreenDetailsViewController(location: self.locations[indexPath.row])
+        var allCitiesIDArray = bookmarkedCitiesIDs.components(separatedBy: ",")
+        
+        let cityScreenController = CityScreenDetailsViewController(location: self.locations[indexPath.row], cityID: allCitiesIDArray[indexPath.row])
         present(cityScreenController, animated: true, completion: nil)
         
     }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="FiveDaysCollectionViewCell" customModule="WeatherForecast" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="107" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="107" height="60"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PvD-7L-cx3">
+                        <rect key="frame" x="34" y="6" width="39.5" height="21"/>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvq-55-fB9" userLabel="Temperature View">
+                        <rect key="frame" x="42" y="33" width="23.5" height="18.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="32" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcE-se-ynq">
+                                <rect key="frame" x="0.0" y="0.0" width="17.5" height="18.5"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="º" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fL-o8-UAa">
+                                <rect key="frame" x="17.5" y="0.0" width="6" height="18.5"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3fL-o8-UAa" firstAttribute="top" secondItem="bvq-55-fB9" secondAttribute="top" id="0s6-8d-llh"/>
+                            <constraint firstItem="gcE-se-ynq" firstAttribute="leading" secondItem="bvq-55-fB9" secondAttribute="leading" id="2rW-qY-qDr"/>
+                            <constraint firstItem="gcE-se-ynq" firstAttribute="top" secondItem="bvq-55-fB9" secondAttribute="top" id="8Qo-Sf-cUo"/>
+                            <constraint firstAttribute="trailing" secondItem="3fL-o8-UAa" secondAttribute="trailing" id="NK6-CK-GLT"/>
+                            <constraint firstAttribute="bottom" secondItem="3fL-o8-UAa" secondAttribute="bottom" id="ax2-RX-msR"/>
+                            <constraint firstAttribute="bottom" secondItem="gcE-se-ynq" secondAttribute="bottom" id="sYh-7V-7WI"/>
+                            <constraint firstItem="3fL-o8-UAa" firstAttribute="leading" secondItem="gcE-se-ynq" secondAttribute="trailing" id="yvx-03-vzK"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="PvD-7L-cx3" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="6" id="7YL-1a-M2a"/>
+                <constraint firstItem="PvD-7L-cx3" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="FKh-WS-Lb8"/>
+                <constraint firstItem="bvq-55-fB9" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Kui-AS-eh7"/>
+                <constraint firstItem="bvq-55-fB9" firstAttribute="top" secondItem="PvD-7L-cx3" secondAttribute="bottom" constant="6" id="X3h-SV-Z3x"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="107" height="100"/>
+            <connections>
+                <outlet property="dayOfTheWeek" destination="PvD-7L-cx3" id="qCg-mO-4rq"/>
+                <outlet property="temperature" destination="gcE-se-ynq" id="xIx-wO-hOb"/>
+                <outlet property="temperatureUnit" destination="3fL-o8-UAa" id="9uD-oG-28H"/>
+            </connections>
+            <point key="canvasLocation" x="61.594202898550726" y="129.91071428571428"/>
+        </collectionViewCell>
+    </objects>
+</document>

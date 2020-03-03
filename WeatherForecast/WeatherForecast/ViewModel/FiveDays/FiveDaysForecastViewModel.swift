@@ -32,8 +32,8 @@ class FiveDaysForecastViewModel: ObservableObject {
         self.cities = cities
   
     }
-  
-func refresh(forCity city: String) {
+
+    func refresh(forCity city: String) {
 
         fiveDaysForecastFetcher.fiveDaysForecastForecastForCities(forCity: cities)
             .map { response in
@@ -56,7 +56,26 @@ func refresh(forCity city: String) {
               receiveValue: { [weak self] forecast in
                 
                 guard let self = self else { return }
-                self.dataSource = forecast
+                
+                var data: [DailyForecastRowViewModel] = []
+                for value1 : DailyForecastRowViewModel in forecast {
+                    
+                    var isRepeated : Bool = false
+                    for value2 : DailyForecastRowViewModel in data {
+                        
+                        if (value1 == value2) {
+                            isRepeated = true
+                        }
+                        
+                    }
+                    
+                    if !isRepeated {
+                        data.append(value1)
+                    }
+                    
+                }
+                
+                self.dataSource = data
                 self.isLoading = false
                 
             })

@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CityScreenDetailsViewController" customModule="WeatherForecast" customModuleProvider="target">
             <connections>
                 <outlet property="cityLabel" destination="GoU-mn-DZf" id="TxC-x4-VcI"/>
+                <outlet property="fiveDaysCollectionView" destination="aU3-VP-WOe" id="gnY-YA-qYj"/>
                 <outlet property="humidityLabel" destination="Iej-GX-SUI" id="TTX-ov-gHh"/>
                 <outlet property="iconImage" destination="gQx-vw-P6h" id="mYc-v9-y6e"/>
                 <outlet property="infoLabel" destination="tRV-P6-27E" id="8RG-Sd-Cme"/>
@@ -302,13 +303,13 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDW-vN-7Z3" userLabel="5-Days Forecast Collection">
                                     <rect key="frame" x="0.0" y="644" width="421" height="60"/>
                                     <subviews>
-                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="v7L-hh-i79" userLabel="5-Days Forecast Collection">
-                                            <rect key="frame" x="0.0" y="0.0" width="421" height="60"/>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="aU3-VP-WOe">
+                                            <rect key="frame" x="4" y="0.0" width="413" height="60"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="60" id="iFq-Gs-Mgg"/>
+                                                <constraint firstAttribute="height" constant="60" id="Etu-5q-827"/>
                                             </constraints>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SM9-Lh-Pwt">
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bpw-VR-8Js">
                                                 <size key="itemSize" width="50" height="50"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -318,10 +319,10 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="v7L-hh-i79" secondAttribute="trailing" id="NfZ-Ah-bOD"/>
-                                        <constraint firstItem="v7L-hh-i79" firstAttribute="leading" secondItem="SDW-vN-7Z3" secondAttribute="leading" id="XaA-Q7-zbw"/>
-                                        <constraint firstAttribute="bottom" secondItem="v7L-hh-i79" secondAttribute="bottom" id="ZCC-oJ-gAR"/>
-                                        <constraint firstItem="v7L-hh-i79" firstAttribute="top" secondItem="SDW-vN-7Z3" secondAttribute="top" id="sNB-DO-7YB"/>
+                                        <constraint firstItem="aU3-VP-WOe" firstAttribute="top" secondItem="SDW-vN-7Z3" secondAttribute="top" id="CeZ-yu-63b"/>
+                                        <constraint firstAttribute="bottom" secondItem="aU3-VP-WOe" secondAttribute="bottom" id="JoW-qf-qOp"/>
+                                        <constraint firstItem="aU3-VP-WOe" firstAttribute="leading" secondItem="SDW-vN-7Z3" secondAttribute="leading" constant="4" id="Xeg-ff-wDt"/>
+                                        <constraint firstAttribute="trailing" secondItem="aU3-VP-WOe" secondAttribute="trailing" constant="4" id="lIU-0Q-zzY"/>
                                     </constraints>
                                 </view>
                             </subviews>

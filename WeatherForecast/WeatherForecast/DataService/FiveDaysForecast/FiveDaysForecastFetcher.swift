@@ -46,7 +46,7 @@ private extension FiveDaysForecastFetcher {
         components.path = FiveDaysAPIStructure.path + "/forecast"
       
         components.queryItems = [
-            URLQueryItem(name: "id", value: "524901"),//city),
+            URLQueryItem(name: "id", value: city),
             URLQueryItem(name: "mode", value: "json"),
             URLQueryItem(name: "units", value: units),
             URLQueryItem(name: "appid", value: FiveDaysAPIStructure.key)

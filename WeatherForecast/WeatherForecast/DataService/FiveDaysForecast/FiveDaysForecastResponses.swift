@@ -12,47 +12,46 @@ import Foundation
 struct FiveDaysForecastResponses: Codable {
     
     let list: [Item]
-    
+      
     struct Item: Codable {
         
-      let date: Date
-      let main: MainClass
-      let weather: [Weather]
+        let date: Date
+        let main: MainClass
+        let weather: [Weather]
+        
+        enum CodingKeys: String, CodingKey {
+        
+            case date = "dt"
+            case main
+            case weather
+        
+        }
       
-      enum CodingKeys: String, CodingKey {
-        
-        case date = "dt"
-        case main
-        case weather
-        
-      }
-        
     }
-    
+      
     struct MainClass: Codable {
-      let temp: Double
+        let temp: Double
     }
-    
-    struct Weather: Codable {
-        
-      let main: MainEnum
-      let weatherDescription: String
       
-      enum CodingKeys: String, CodingKey {
+    struct Weather: Codable {
+      
+        let main: MainEnum
+        let weatherDescription: String
         
-        case main
-        case weatherDescription = "description"
+        enum CodingKeys: String, CodingKey {
+            case main
+            case weatherDescription = "description"
+        
+        }
         
       }
-        
-    }
-    
+      
     enum MainEnum: String, Codable {
-        
-      case clear = "Clear"
-      case clouds = "Clouds"
-      case rain = "Rain"
-        
+    
+        case clear = "Clear"
+        case clouds = "Clouds"
+        case rain = "Rain"
+      
     }
 
 }
