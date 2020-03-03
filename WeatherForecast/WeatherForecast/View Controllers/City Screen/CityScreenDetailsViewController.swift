@@ -20,6 +20,7 @@ class CityScreenDetailsViewController: UIViewController {
     @IBOutlet weak var rainChancesLabel: UILabel!
     @IBOutlet weak var windInfoLabel: UILabel!
     @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var speedUnitLabel: UILabel!
     
     var location: List
     
@@ -45,19 +46,32 @@ class CityScreenDetailsViewController: UIViewController {
     
     func insertInfoToLayout() {
         
+        let defaults = UserDefaults.standard
+        let units : String = defaults.string(forKey: userDefaultsUnitSystemKey) ?? metricValue
+        
+        var temperatureUnit = "º"
+        var speedUnit = "m/s"
+        if (units == imperialValue) {
+
+            temperatureUnit = "ºF"
+            speedUnit = "mph"
+            
+        }
+        
         self.cityLabel.text = location.name
-        self.temperatureLabel.text = String(format: "%.fº", location.main.temp);
+        self.temperatureLabel.text = String(format: "%.f", location.main.temp).appending(temperatureUnit);
         
         let weather = location.weather.first
         self.infoLabel.text = weather?.weatherDescription
         
-        self.maxTemperatureLabel.text =  String(format: "%.fº", location.main.tempMax);
-        self.minTemperatureLabel.text = String(format: "%.fº", location.main.tempMin);
+        self.maxTemperatureLabel.text =  String(format: "%.f", location.main.tempMax).appending(temperatureUnit);
+        self.minTemperatureLabel.text = String(format: "%.f", location.main.tempMin).appending(temperatureUnit);
         self.humidityLabel.text =  String(format: "%d", location.main.humidity);
         self.rainChancesLabel.text = "1"
         
         self.windInfoLabel.text = String(format: "%.f", location.wind.speed)
         self.rainChancesLabel.text = String(format: "%.f", location.precipitation ?? "-")
+        self.speedUnitLabel.text = speedUnit
         
         self.iconImage.image = getIconForCurrentWeather(currentWeather: weather!.main)
         

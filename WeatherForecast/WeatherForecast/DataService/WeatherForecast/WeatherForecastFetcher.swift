@@ -39,19 +39,22 @@ private extension WeatherForecastFetcher {
 
     func createCurrentWeatherForecastComponentsWithCities( withCities cities: String ) -> URLComponents {
         
-      var components = URLComponents()
-      components.scheme = WeatherAPIStructure.scheme
-      components.host = WeatherAPIStructure.host
-      components.path = WeatherAPIStructure.path + "/group"
+        let defaults = UserDefaults.standard
+        let units : String = defaults.string(forKey: userDefaultsUnitSystemKey) ?? metricValue
+        
+        var components = URLComponents()
+        components.scheme = WeatherAPIStructure.scheme
+        components.host = WeatherAPIStructure.host
+        components.path = WeatherAPIStructure.path + "/group"
       
-      components.queryItems = [
-        URLQueryItem(name: "id", value: cities),
-        URLQueryItem(name: "mode", value: "json"),
-        URLQueryItem(name: "units", value: "metric"),
-        URLQueryItem(name: "appid", value: WeatherAPIStructure.key)
-      ]
+        components.queryItems = [
+            URLQueryItem(name: "id", value: cities),
+            URLQueryItem(name: "mode", value: "json"),
+            URLQueryItem(name: "units", value: units),
+            URLQueryItem(name: "appid", value: WeatherAPIStructure.key)
+        ]
       
-      return components
+        return components
         
     }
     

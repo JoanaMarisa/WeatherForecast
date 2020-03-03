@@ -211,6 +211,44 @@ class HomeScreenViewController: UIViewController {
         
     }
     
+    @IBAction func defineSettings(_ sender: Any) {
+        
+        let defaults = UserDefaults.standard
+        
+        let actionSheetController: UIAlertController = UIAlertController(title: "Select", message: "Unit system", preferredStyle: .actionSheet)
+
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        actionSheetController.addAction(cancelAction)
+        
+        let selectMetricAction: UIAlertAction = UIAlertAction(title: "Metric", style: .default) { action -> Void in
+            
+            let unit = defaults.string(forKey: userDefaultsUnitSystemKey)
+            defaults.set(metricValue, forKey: userDefaultsUnitSystemKey)
+            
+            if (unit != metricValue) {
+                self.reloadCollectionView()
+            }
+            
+        }
+        actionSheetController.addAction(selectMetricAction)
+        
+        let selectImperialAction: UIAlertAction = UIAlertAction(title: "Imperial", style: .default) { action -> Void in
+            
+            let unit = defaults.string(forKey: userDefaultsUnitSystemKey)
+            defaults.set(imperialValue, forKey: userDefaultsUnitSystemKey)
+            
+            if (unit != imperialValue) {
+                self.reloadCollectionView()
+            }
+            
+        }
+        actionSheetController.addAction(selectImperialAction)
+
+        present(actionSheetController, animated: true, completion: nil)
+        
+    }
+    
+    
     @IBAction func addLocationsToList(_ sender: Any) {
         
         self.cityListViewModel.resetSearch()
