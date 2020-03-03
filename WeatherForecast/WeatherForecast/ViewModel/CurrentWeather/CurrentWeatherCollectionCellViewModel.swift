@@ -1,5 +1,5 @@
 //
-//  CurrentWeatherViewModel.swift
+//  CurrentWeatherCollectionCellViewModel.swift
 //  WeatherForecast
 //
 //  Created by Joana Henriques on 26/02/2020.

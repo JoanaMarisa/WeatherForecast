@@ -61,7 +61,7 @@
                                         <constraint firstItem="HSg-YK-K2I" firstAttribute="top" secondItem="U5g-Do-BWQ" secondAttribute="top" constant="20" id="x6S-Ww-ReX"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ke6-8m-RDb" userLabel="Weather View" customClass="PhoneAccountSelectorView">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ke6-8m-RDb" userLabel="Weather View">
                                     <rect key="frame" x="0.0" y="70" width="421" height="100"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AB0-D7-y5L" userLabel="Temperature Label">
@@ -299,7 +299,7 @@
                                         <constraint firstAttribute="trailing" secondItem="iwg-K5-CLr" secondAttribute="trailing" id="w74-sD-0lw"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDW-vN-7Z3" userLabel="5-Days Forecast Collection" customClass="EBKScheduleTransactionView">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDW-vN-7Z3" userLabel="5-Days Forecast Collection">
                                     <rect key="frame" x="0.0" y="644" width="421" height="60"/>
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="v7L-hh-i79" userLabel="5-Days Forecast Collection">

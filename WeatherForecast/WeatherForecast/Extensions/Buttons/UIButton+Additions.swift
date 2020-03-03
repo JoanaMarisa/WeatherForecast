@@ -12,8 +12,8 @@ extension UIButton {
 
     func setBackgroundImage(_ image: UIImage?) {
         
-        self.setBackgroundImage(image, for: UIControl.State.highlighted)
-        self.setBackgroundImage(image, for: UIControl.State.normal)
+        setBackgroundImage(image, for: UIControl.State.highlighted)
+        setBackgroundImage(image, for: UIControl.State.normal)
         
     }
     

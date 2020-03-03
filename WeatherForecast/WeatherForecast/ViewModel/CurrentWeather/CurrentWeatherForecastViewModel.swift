@@ -1,5 +1,5 @@
 //
-//  WeatherForecastViewModel.swift
+//  CurrentWeatherForecastViewModel.swift
 //  WeatherForecast
 //
 //  Created by Joana Henriques on 26/02/2020.
@@ -17,7 +17,7 @@ class CurrentWeatherForecastViewModel: ObservableObject {
     
     var isLoading: Bool = false {
         didSet {
-            self.updateLoadingStatus?()
+            updateLoadingStatus?()
         }
     }
     
@@ -46,6 +46,7 @@ class CurrentWeatherForecastViewModel: ObservableObject {
             
                     case .failure:
                         self.dataSource = nil
+                    
                     case .finished:
                         break
         
@@ -54,8 +55,8 @@ class CurrentWeatherForecastViewModel: ObservableObject {
             }, receiveValue: { [weak self] weather in
         
                 guard let self = self else { return }
+                
                 self.dataSource = weather
-               
                 self.isLoading = false
         
             }).store(in: &disposables)

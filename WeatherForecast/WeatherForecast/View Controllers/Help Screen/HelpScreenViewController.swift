@@ -14,7 +14,7 @@ class HelpScreenViewController: UIViewController {
     let webView = WKWebView()
     
     override func loadView() {
-        self.view = webView
+        view = webView
     }
     
     override func viewDidLoad() {

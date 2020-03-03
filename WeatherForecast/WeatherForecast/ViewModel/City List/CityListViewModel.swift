@@ -36,7 +36,7 @@ class CityListViewModel: ObservableObject {
 
     func update() {
         
-        self.isLoading = true
+        isLoading = true
         getSupportedCountries()
         
     }
@@ -55,7 +55,7 @@ class CityListViewModel: ObservableObject {
             
         }
 
-        return self.supportedCities.filter(filterSeach)
+        return supportedCities.filter(filterSeach)
 
     }
     
@@ -74,21 +74,21 @@ class CityListViewModel: ObservableObject {
             
         }
 
-        return self.supportedCities.filter(filterSeach)
+        return supportedCities.filter(filterSeach)
 
     }
     
     func resetSearch() {
-        self.supportedCities = self.allSupportedCitites
+        supportedCities = allSupportedCitites
     }
         
     // MARK: Private helper
 
     private func getSupportedCountries() {
         
-        self.allSupportedCitites = cityFecther.supportedCountries()
-        self.supportedCities = allSupportedCitites
-        self.isLoading = false
+        allSupportedCitites = cityFecther.supportedCountries()
+        supportedCities = allSupportedCitites
+        isLoading = false
         
     }
     

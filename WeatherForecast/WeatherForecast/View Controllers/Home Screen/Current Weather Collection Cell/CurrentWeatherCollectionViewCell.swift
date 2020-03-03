@@ -24,41 +24,41 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
     }
     
     var currentWeatherForecastViewModel : List? {
-        
+
             didSet {
-            
+
                 let currentWeather = currentWeatherForecastViewModel?.weather.first
                 let currentMain = currentWeatherForecastViewModel?.main
                 
-                self.weatherIcon?.image = getIconForCurrentWeather(currentWeather: currentWeather!.main)
+                weatherIcon?.image = getIconForCurrentWeather(currentWeather: currentWeather!.main)
                 
                 switch currentWeather?.main {
                 case "Clouds":
-                    self.contentView.backgroundColor = mediumWeatherColor
+                    contentView.backgroundColor = mediumWeatherColor
                     break
                     
                 case "Clear":
-                    self.contentView.backgroundColor = goodWeatherColor
+                    contentView.backgroundColor = goodWeatherColor
                     break
                     
                 case "Snow":
-                    self.contentView.backgroundColor = badWeatherColor
+                    contentView.backgroundColor = badWeatherColor
                     break
                     
                 case "Rain":
-                    self.contentView.backgroundColor = badWeatherColor
+                    contentView.backgroundColor = badWeatherColor
                     break
                     
                 case "Haze":
-                    self.contentView.backgroundColor = mediumWeatherColor
+                    contentView.backgroundColor = mediumWeatherColor
                     break
                     
                 case "Drizzle":
-                    self.contentView.backgroundColor = badWeatherColor
+                    contentView.backgroundColor = badWeatherColor
                     break
                     
                 default:
-                    self.contentView.backgroundColor = mediumWeatherColor
+                    contentView.backgroundColor = mediumWeatherColor
                     break
                 }
 
@@ -73,9 +73,9 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
                 }
                 
                 let currentCountry = ", ".appending(currentWeatherForecastViewModel?.sys.country ?? "")
-                self.cityTextLabel.text = currentWeatherForecastViewModel?.name.appending(currentCountry)
+                cityTextLabel.text = currentWeatherForecastViewModel?.name.appending(currentCountry)
                 
-                self.temperatureValueLabel.text = String(format: "%d", temp).appending(temperatureUnit)
+                temperatureValueLabel.text = String(format: "%d", temp).appending(temperatureUnit)
                 
             }
         

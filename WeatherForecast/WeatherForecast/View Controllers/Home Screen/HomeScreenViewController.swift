@@ -14,9 +14,14 @@ import CoreLocation
 
 class HomeScreenViewController: UIViewController {
 
-    var viewModel: CurrentWeatherForecastViewModel!
-    var locations: [List]!
+    lazy var viewModel: CurrentWeatherForecastViewModel = {
+        return CurrentWeatherForecastViewModel(cities: self.bookmarkedCitiesIDs, weatherFetcher: self.fetcher)
+    }()
 
+    lazy var locations: [List] = {
+        return []
+    }()
+    
     let fetcher = WeatherForecastFetcher()
     var cityListViewModel: CityListViewModel
     var bookmarkedCitiesIDs: String! = String()
@@ -52,10 +57,10 @@ class HomeScreenViewController: UIViewController {
     func initLocationsCollectionView() {
         
         let cellNib = UINib(nibName: String(describing: CurrentWeatherCollectionViewCell.self), bundle: nil)
-        self.locationsCollectionView.register(cellNib, forCellWithReuseIdentifier: String(describing: CurrentWeatherCollectionViewCell.self))
+        locationsCollectionView.register(cellNib, forCellWithReuseIdentifier: String(describing: CurrentWeatherCollectionViewCell.self))
         
-        self.locationsCollectionView.delegate = self
-        self.locationsCollectionView.dataSource = self
+        locationsCollectionView.delegate = self
+        locationsCollectionView.dataSource = self
     
         reloadCollectionView()
         
@@ -65,19 +70,19 @@ class HomeScreenViewController: UIViewController {
         
         if CLLocationManager.locationServicesEnabled() {
         
-            self.locationManager.delegate = self
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            self.locationManager.startUpdatingLocation()
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
         
         }
 
-        self.mapViewKit.delegate = self
-        self.mapViewKit.mapType = .standard
-        self.mapViewKit.isZoomEnabled = true
-        self.mapViewKit.isScrollEnabled = true
+        mapViewKit.delegate = self
+        mapViewKit.mapType = .standard
+        mapViewKit.isZoomEnabled = true
+        mapViewKit.isScrollEnabled = true
 
-        if let coor = self.mapViewKit.userLocation.location?.coordinate{
-            self.mapViewKit.setCenter(coor, animated: true)
+        if let coor = self.mapViewKit.userLocation.location?.coordinate {
+            mapViewKit.setCenter(coor, animated: true)
         }
         
         addLongPressGesture()
@@ -86,8 +91,8 @@ class HomeScreenViewController: UIViewController {
     
     func initButtons() {
         
-        self.zoomInButton.setBackgroundImage(UIImage.init(named: "zoomIn"))
-        self.zoomOutButton.setBackgroundImage(UIImage.init(named: "zoomOut"))
+        zoomInButton.setBackgroundImage(UIImage.init(named: "zoomIn"))
+        zoomOutButton.setBackgroundImage(UIImage.init(named: "zoomOut"))
     
     }
     
@@ -109,18 +114,18 @@ class HomeScreenViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.mapViewKit.showsUserLocation = true;
+        mapViewKit.showsUserLocation = true;
     
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.mapViewKit.showsUserLocation = false
+        mapViewKit.showsUserLocation = false
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
         super.viewWillTransition(to: size, with: coordinator)
-        self.locationsCollectionView.reloadData()
+        locationsCollectionView.reloadData()
         
     }
     
@@ -128,14 +133,14 @@ class HomeScreenViewController: UIViewController {
     // MARK: Location Support Methods
     
     func showMapPlaceholder() {
-        self.mapView.isHidden = true
+        mapView.isHidden = true
     }
     
     func addLongPressGesture() {
         
         let longPressRecogniser = UILongPressGestureRecognizer(target:self , action:#selector(handleLongPress(_:)))
         longPressRecogniser.minimumPressDuration = 0.6
-        self.mapViewKit.addGestureRecognizer(longPressRecogniser)
+        mapViewKit.addGestureRecognizer(longPressRecogniser)
         
     }
     
@@ -151,8 +156,8 @@ class HomeScreenViewController: UIViewController {
         let annotation:MKPointAnnotation = MKPointAnnotation()
         annotation.coordinate = touchMapCoordinate
         
-        self.mapViewKit.addAnnotation(annotation)
-        self.centerMap(touchMapCoordinate)
+        mapViewKit.addAnnotation(annotation)
+        centerMap(touchMapCoordinate)
 
         let geoCoder = CLGeocoder()
         let location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
@@ -191,7 +196,7 @@ class HomeScreenViewController: UIViewController {
         var region: MKCoordinateRegion = mapViewKit.region
         region.span.latitudeDelta /= 2.0
         region.span.longitudeDelta /= 2.0
-        self.mapViewKit.setRegion(region, animated: true)
+        mapViewKit.setRegion(region, animated: true)
         
     }
     
@@ -326,7 +331,7 @@ extension HomeScreenViewController: CLLocationManagerDelegate, MKMapViewDelegate
     
     func centerMap(_ center:CLLocationCoordinate2D){
         
-        self.saveCurrentLocation(center)
+        saveCurrentLocation(center)
         
         let latDelta: CLLocationDegrees = 0.10
         let lonDelta: CLLocationDegrees = 0.10
@@ -334,14 +339,14 @@ extension HomeScreenViewController: CLLocationManagerDelegate, MKMapViewDelegate
         let span = MKCoordinateSpan.init(latitudeDelta: latDelta, longitudeDelta: lonDelta)
 
         let newRegion = MKCoordinateRegion(center:center , span: span)
-        self.mapViewKit.setRegion(newRegion, animated: true)
+        mapViewKit.setRegion(newRegion, animated: true)
     
     }
     
     func saveCurrentLocation(_ center:CLLocationCoordinate2D) {
         
         print("\(center.latitude) , \(center.longitude)")
-        self.myLocation = center
+        myLocation = center
     
     }
     
@@ -351,7 +356,7 @@ extension HomeScreenViewController: CLLocationManagerDelegate, MKMapViewDelegate
             
             if (view.annotation?.coordinate.latitude == annotation.coordinate.latitude) &&
                 (view.annotation?.coordinate.longitude == annotation.coordinate.longitude) {
-                self.mapViewKit.removeAnnotation(annotation)
+                mapViewKit.removeAnnotation(annotation)
             }
             
         }
@@ -364,13 +369,13 @@ extension HomeScreenViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if (self.locations?.count ?? 0 > 0) {
-            self.addNewLocationsView.isHidden = true
+        if (locations.count > 0) {
+            addNewLocationsView.isHidden = true
         } else {
-            self.addNewLocationsView.isHidden = false
+            addNewLocationsView.isHidden = false
         }
         
-        return self.locations?.count ?? 0;
+        return locations.count;
         
     }
     
@@ -411,7 +416,7 @@ extension HomeScreenViewController: UICollectionViewDelegate, UICollectionViewDa
             let availableWidth = self.locationsCollectionView.bounds.size.width / 6
             let availableHeight = self.view.bounds.size.height / 3
                 
-            self.heightCollectionConstraint.constant = availableHeight + 20
+            heightCollectionConstraint.constant = availableHeight + 20
             return CGSize(width: availableWidth, height: availableHeight)
             
         } else {
@@ -419,7 +424,7 @@ extension HomeScreenViewController: UICollectionViewDelegate, UICollectionViewDa
             let availableWidth = self.locationsCollectionView.bounds.size.width / 3
             let availableHeight = self.view.bounds.size.height / 4
             
-            self.heightCollectionConstraint.constant = availableHeight + 10
+            heightCollectionConstraint.constant = availableHeight + 10
             return CGSize(width: availableWidth, height: availableHeight)
             
         }
