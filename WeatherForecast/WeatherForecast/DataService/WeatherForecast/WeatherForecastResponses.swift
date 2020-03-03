@@ -10,12 +10,15 @@ import Foundation
 
 // MARK: - CurrentWeatherForecastResponse
 struct CurrentWeatherForecastResponse: Codable {
+    
     let cnt: Int
     let list: [List]
+    
 }
 
 // MARK: - List
 struct List: Codable {
+    
     let coord: Coord
     let sys: Sys
     let weather: [Weather]
@@ -26,6 +29,7 @@ struct List: Codable {
     let clouds: Clouds
     let dt, id: Int
     let name: String
+    
 }
 
 // MARK: - Clouds
@@ -40,39 +44,51 @@ struct Coord: Codable {
 
 // MARK: - Main
 struct Main: Codable {
+    
     let temp, feelsLike, tempMin, tempMax: Double
     let pressure, humidity: Int
 
     enum CodingKeys: String, CodingKey {
+        
         case temp
         case feelsLike = "feels_like"
         case tempMin = "temp_min"
         case tempMax = "temp_max"
         case pressure, humidity
+        
     }
+    
 }
 
 // MARK: - Sys
 struct Sys: Codable {
+    
     let country: String
     let timezone, sunrise, sunset: Int
+    
 }
 
 // MARK: - Weather
 struct Weather: Codable {
+    
     let id: Int
     let main, weatherDescription, icon: String
 
     enum CodingKeys: String, CodingKey {
+        
         case id, main
         case weatherDescription = "description"
         case icon
+        
     }
+    
 }
 
 // MARK: - Wind
 struct Wind: Codable {
+    
     let speed: Double
     let deg: Int?
+    
 }
 

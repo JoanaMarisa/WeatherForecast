@@ -1,5 +1,5 @@
 //
-//  WeatherOutput.swift
+//  WeatherForecastFetcher.swift
 //  WeatherForecast
 //
 //  Created by Joana Henriques on 26/02/2020.
@@ -86,6 +86,7 @@ extension WeatherForecastFetcher: WeatherForecastFetchable {
             decode(pair.data)
           }
           .eraseToAnyPublisher()
+        
       }
         
 
@@ -106,6 +107,7 @@ extension WeatherForecastFetcher: WeatherForecastFetchable {
         decode(pair.data)
       }
       .eraseToAnyPublisher()
+    
   }
     
 }
@@ -115,14 +117,14 @@ extension WeatherForecastFetcher: WeatherForecastFetchable {
 
 func decode<T: Decodable>(_ data: Data) -> AnyPublisher<T, WeatherForecastError> {
     
-  let decoder = JSONDecoder()
-  decoder.dateDecodingStrategy = .secondsSince1970
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .secondsSince1970
 
-  return Just(data)
-    .decode(type: T.self, decoder: decoder)
-    .mapError { error in
-      .parsing(description: error.localizedDescription)
-    }
-    .eraseToAnyPublisher()
+    return Just(data)
+        .decode(type: T.self, decoder: decoder)
+        .mapError { error in
+            .parsing(description: error.localizedDescription)
+        }
+        .eraseToAnyPublisher()
     
 }
