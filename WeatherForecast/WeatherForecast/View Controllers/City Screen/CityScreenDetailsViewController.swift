@@ -58,7 +58,9 @@ class CityScreenDetailsViewController: UIViewController {
             
         }
         
-        self.cityLabel.text = location.name
+        let currentCountry = ", ".appending(location.sys.country)
+        self.cityLabel.text = location.name.appending(currentCountry)
+        
         self.temperatureLabel.text = String(format: "%.f", location.main.temp).appending(temperatureUnit);
         
         let weather = location.weather.first

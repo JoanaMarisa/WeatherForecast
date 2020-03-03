@@ -84,7 +84,7 @@
                                                 <constraint firstAttribute="width" constant="15" id="Dcl-X6-1nL"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRV-P6-27E" userLabel="Info Label">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRV-P6-27E" userLabel="Info Label">
                                             <rect key="frame" x="65" y="92.5" width="0.0" height="0.0"/>
                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="12"/>
                                             <nil key="textColor"/>
@@ -97,7 +97,7 @@
                                         <constraint firstItem="AB0-D7-y5L" firstAttribute="leading" secondItem="Ke6-8m-RDb" secondAttribute="leading" constant="40" id="0dc-iY-VAf"/>
                                         <constraint firstItem="vio-kz-qfs" firstAttribute="bottom" secondItem="gQx-vw-P6h" secondAttribute="bottom" id="8an-MV-bYH"/>
                                         <constraint firstAttribute="height" priority="999" constant="100" id="DZa-oQ-f4U"/>
-                                        <constraint firstItem="gQx-vw-P6h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tRV-P6-27E" secondAttribute="trailing" constant="20" id="GUk-YN-mYe"/>
+                                        <constraint firstItem="gQx-vw-P6h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tRV-P6-27E" secondAttribute="trailing" constant="10" id="GUk-YN-mYe"/>
                                         <constraint firstItem="tRV-P6-27E" firstAttribute="centerY" secondItem="vio-kz-qfs" secondAttribute="centerY" id="dhW-ry-teG"/>
                                         <constraint firstItem="gQx-vw-P6h" firstAttribute="top" secondItem="AB0-D7-y5L" secondAttribute="top" id="hTK-XI-2Yg"/>
                                         <constraint firstAttribute="trailing" secondItem="gQx-vw-P6h" secondAttribute="trailing" constant="50" id="sJl-Kq-Eoy"/>

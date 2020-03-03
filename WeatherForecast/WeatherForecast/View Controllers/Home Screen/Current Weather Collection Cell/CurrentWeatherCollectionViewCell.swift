@@ -64,8 +64,18 @@ class CurrentWeatherCollectionViewCell: UICollectionViewCell {
 
                 let temp: Int = Int(currentMain!.temp)
 
-                self.temperatureValueLabel.text = String(format: "%dº", temp)
-                self.cityTextLabel.text = currentWeatherForecastViewModel?.name
+                let defaults = UserDefaults.standard
+                let units : String = defaults.string(forKey: userDefaultsUnitSystemKey) ?? metricValue
+                
+                var temperatureUnit = "º"
+                if (units == imperialValue) {
+                    temperatureUnit = "ºF"
+                }
+                
+                let currentCountry = ", ".appending(currentWeatherForecastViewModel?.sys.country ?? "")
+                self.cityTextLabel.text = currentWeatherForecastViewModel?.name.appending(currentCountry)
+                
+                self.temperatureValueLabel.text = String(format: "%d", temp).appending(temperatureUnit)
                 
             }
         
