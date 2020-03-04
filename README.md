@@ -4,7 +4,7 @@ Weather Forecast is a iOS App for consulting the weather information.
 
 ## Installation
 
-This project is available to download at Github. Click [here](https://gifs.com/gif/1WnMEZ).
+This project is available to download at Github. Click [here](https://github.com/JoanaMarisa/WeatherForecast/tree/DEV).
 
 
 ## Usage
@@ -31,6 +31,7 @@ Inside the **Current Weather Section** it's possible to search for locations.
 ![](search.gif)
 
 To see the weather details, select a location.
+
 ![](details.gif)
 
 
