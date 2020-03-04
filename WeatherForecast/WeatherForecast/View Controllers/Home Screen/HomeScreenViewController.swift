@@ -131,11 +131,7 @@ class HomeScreenViewController: UIViewController {
     
     
     // MARK: Location Support Methods
-    
-    func showMapPlaceholder() {
-        mapView.isHidden = true
-    }
-    
+        
     func addLongPressGesture() {
         
         let longPressRecogniser = UILongPressGestureRecognizer(target:self , action:#selector(handleLongPress(_:)))
@@ -411,7 +407,7 @@ extension HomeScreenViewController: UICollectionViewDelegate, UICollectionViewDa
         
         if isLandscape {
             
-            showMapPlaceholder()
+            mapView.isHidden = true
             
             let availableWidth = self.locationsCollectionView.bounds.size.width / 6
             let availableHeight = self.view.bounds.size.height / 3
@@ -420,6 +416,8 @@ extension HomeScreenViewController: UICollectionViewDelegate, UICollectionViewDa
             return CGSize(width: availableWidth, height: availableHeight)
             
         } else {
+            
+            mapView.isHidden = false
             
             let availableWidth = self.locationsCollectionView.bounds.size.width / 3
             let availableHeight = self.view.bounds.size.height / 4
@@ -441,7 +439,7 @@ extension HomeScreenViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        var allCitiesIDArray = bookmarkedCitiesIDs.components(separatedBy: ",")
+        let allCitiesIDArray = bookmarkedCitiesIDs.components(separatedBy: ",")
         
         let cityScreenController = CityScreenDetailsViewController(location: self.locations[indexPath.row], cityID: allCitiesIDArray[indexPath.row])
         present(cityScreenController, animated: true, completion: nil)
